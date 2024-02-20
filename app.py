@@ -1,14 +1,7 @@
-import pickle
 import numpy as np
 from flask import Flask, request, render_template
 import gzip
-
-#import pandas as pd
-
-
-
-
-
+import pickle
 app = Flask(__name__)
 with gzip.open("model.pickle","rb") as file:
     load_model = pickle.load(file)
@@ -23,9 +16,8 @@ def predict():
         if request.method == 'POST':
             
            
-        
-           Annual_Income =float(request.form["Annual_Income"])
            Age = float(request.form["Age"])
+           Annual_Income =float(request.form["Annual_Income"])
            Num_Bank_Accounts =float(request.form["Num_Bank_Accounts"])
            Num_Credit_Card = float(request.form["Num_Credit_Card"])
            Num_of_Loan = float(request.form["Num_of_Loan"])
@@ -51,13 +43,13 @@ def predict():
            output = int(prediction)
            if (output == 0):
          
-               return render_template("result.html",prediction_text=" Credit Score is classified as Good")
+               return render_template("result.html",prediction_text=" predicted Credit Score is   Good")
            
            elif (output==1):
-                return render_template("result.html",prediction_text="Credit Score is classified as Poor")
+                return render_template("result.html",prediction_text="predicted Credit Score is  Poor")
         
            else :
-                return render_template("result.html",prediction_text= "Credit Score is classified as Standard")
+                return render_template("result.html",prediction_text= " predicted Credit Score is  Standard")
                                         
                                  
           
